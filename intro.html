@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>前端分享</title>
+    <style>
+      video{
+        width: 500px;
+        position: absolute;
+        top: 400px;
+        left: 800px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="first-page">
+        <span id="first-default">Enthusiasm for<p id="first-words"></p></span>
+    </div>
+    <video src="static/google.mp4" controls="controls"></video>
+    <script src='js/jquery.js'></script>
+    <script>
+    $(document).ready(function() {
+        initAutoType();
+
+    });
+    var initAutoType = function() {
+        var types = ["FE Developer.", "Dev2.", "User Experience."];
+        var words = $("#first-words");
+
+        var stopType = false; //用于停止自动打字的
+
+        var index = 0;
+        var tempWords = "";
+        var tempStop = false;
+        var isNext = false;
+        var time = 100;
+
+        var startType = setInterval(function() {
+            if (stopType) {
+                //如果需要停止打字
+                clearInterval(startType);
+            }
+            if(tempStop){
+              return;
+            }
+            if (tempWords.length === 0) {
+                //如果删完了，就开始
+                if (isNext) {
+                    index++;
+                    index = index % 3;
+                    isNext = false;
+                }
+                tempWords = types[index].substring(0, tempWords.length + 1);
+            } else if (tempWords.length === types[index].length && isNext === false) {
+                //如果已经到头了，就要删去
+                // tempWords = tempWords.substring(0,tempWords.length-1);
+                isNext = true;
+                time = 5000;
+                tempStop = true;
+                setTimeout(function(){
+                  tempStop = false;
+                },1500);
+            } else {
+                //如果既没删完也没显示完
+                if (isNext) {
+                    //如果是在减少
+                    tempWords = tempWords.substring(0, tempWords.length - 1);
+                    time = 60;
+                } else {
+                    //如果在增多
+                    time = 100;
+                    tempWords = types[index].substring(0, tempWords.length + 1);
+                }
+            }
+            words.html("&nbsp;" + tempWords);
+        }, time);
+    };
+    </script>
+</body>
+
+</html>
