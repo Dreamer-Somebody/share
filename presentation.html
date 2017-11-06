@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>前端分享</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./css/swiper.css">
+    <!-- Demo styles -->
+    <style>
+    html,
+    body {
+        position: relative;
+        height: 100%;
+    }
+
+    body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }
+
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .swiper-container-v {
+        background: #eee;
+    }
+    .catgory .swiper-slide {
+      background:rgb(17, 205, 197);
+    }
+    </style>
+</head>
+
+<body>
+    <!-- Swiper -->
+    <div class="swiper-container swiper-container-h">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="typing text" style="position: absolute;z-index:100;top:300px;left: 50px;">
+                    <p style="font-size: 40px;font-family: consolas;color: #5f5e5e;">Enthusiasm for<span id="first-words" style="color: #dd6e6e;"></span></p>
+                </div>
+                <div class="computerImg" style="position:absolute;width:800px;right:0">
+                    <img src="./static/computer.jpg" alt="" style="width:100%" />
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div style="position:absolute;width:500px;left:150px;top:200px">
+                    <p style="font-size:40px;font-family:youyuan">一切的开始</p>
+                    <img src="./static/imagination.png" alt="" style="width:100%" /></div>
+                <div style="position:absolute;width:500px;left:850px;top:200px">
+                    <p style="font-size:40px;font-family:youyuan">无限的可能</p>
+                    <video style="width:100%" src="./static/google.mp4" controls="controls"></video>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="swiper-container swiper-container-v">
+                    <div class="swiper-wrapper catgory">
+                        <div class="swiper-slide">Vertical Slide 1</div>
+                        <div class="swiper-slide">Vertical Slide 2</div>
+                        <div class="swiper-slide">Vertical Slide 3</div>
+                        <div class="swiper-slide">Vertical Slide 4</div>
+                        <div class="swiper-slide">Vertical Slide 5</div>
+                    </div>
+                    <div class="swiper-pagination swiper-pagination-v"></div>
+                </div>
+            </div>
+            <div class="swiper-slide">Horizontal Slide 3</div>
+            <div class="swiper-slide">Horizontal Slide 4</div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-h"></div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <!-- Swiper JS -->
+    <script src='js/jquery.js'></script>
+    <script src="./js/swiper.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+    var swiperH = new Swiper('.swiper-container-h', {
+        spaceBetween: 50,
+        scrollbar: {
+            el: '.swiper-scrollbar',
+            hide: true,
+        },
+    });
+    var swiperV = new Swiper('.swiper-container-v', {
+        direction: 'vertical',
+        spaceBetween: 50,
+        pagination: {
+            el: '.swiper-pagination-v',
+            clickable: true,
+        },
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        initAutoType();
+
+    });
+    var initAutoType = function() {
+        var types = ["FE Developer.", "Dev2.", "User Experience.","creativity."];
+        var words = $("#first-words");
+
+        var stopType = false; //用于停止自动打字的
+
+        var index = 0;
+        var tempWords = "";
+        var tempStop = false;
+        var isNext = false;
+        var time = 80;
+
+        var startType = setInterval(function() {
+            if (stopType) {
+                //如果需要停止打字
+                clearInterval(startType);
+            }
+            if (tempStop) {
+                return;
+            }
+            if (tempWords.length === 0) {
+                //如果删完了，就开始
+                if (isNext) {
+                    index++;
+                    index = index % 4;
+                    isNext = false;
+                }
+                tempWords = types[index].substring(0, tempWords.length + 1);
+            } else if (tempWords.length === types[index].length && isNext === false) {
+                //如果已经到头了，就要删去
+                // tempWords = tempWords.substring(0,tempWords.length-1);
+                isNext = true;
+                time = 5000;
+                tempStop = true;
+                setTimeout(function() {
+                    tempStop = false;
+                }, 1500);
+            } else {
+                //如果既没删完也没显示完
+                if (isNext) {
+                    //如果是在减少
+                    tempWords = tempWords.substring(0, tempWords.length - 1);
+                    time = 60;
+                } else {
+                    //如果在增多
+                    time = 100;
+                    tempWords = types[index].substring(0, tempWords.length + 1);
+                }
+            }
+            words.html("&nbsp;" + tempWords);
+        }, time);
+    };
+    </script>
+</body>
+
+</html>
