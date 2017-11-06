@@ -1,0 +1,28 @@
+drag drop （在线visio，拖拽上传）{
+    1. 拖拽方式选取文件
+    2. 上传图片前显示图片的小摘要tumbnail
+    3. 在浏览器端校验上传文件的mimetype是否与所需文件类新相符
+    4. 在浏览器端校验上传文件大小
+    5. 高级功能：切割文件的某段内容
+    6. 高级功能：监控浏览器读取本地文件的进度
+}
+transform（translate + perspective + transition）
+canvas 宇宙
+canvas 地图？
+(再往上可以配合webGL实现全景图)
+webGL 3D
+audio音频
+canvas 滤镜
+fileReader（读取html、excel、indexDB离线应用）
+游戏
+微信端交互优化及实践
+网站分享
+我自己的想法
+
+
+step1 drag + drop API及示例 + 网上例子
+step2 fileReader API及之前的drag后的实例演示将html展示出来(iframe)，并提出娟娟姐说的离线解决方案(localStorage + fillFormField 截取html中的表单元素) 
+step3 fileReader 停在展示图片处
+step4 translate各属性展示 + persepective
+step5 展示元素周期表
+step6 
