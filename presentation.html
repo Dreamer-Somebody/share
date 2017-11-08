@@ -17,7 +17,7 @@
 
     body {
         background: #eee;
-        font-family: Microsoft YaHei UI Light,Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-family: Microsoft YaHei UI Light, Helvetica Neue, Helvetica, Arial, sans-serif;
         font-size: 14px;
         color: #000;
         margin: 0;
@@ -52,16 +52,23 @@
     .swiper-container-v {
         background: #eee;
     }
+
     .catgory .swiper-slide {
-      background:rgb(17, 205, 197);
+        background: rgb(17, 205, 197);
     }
+
     .catLi {
         list-style: none;
     }
+
     .catLi li {
         padding-bottom: 75px;
         font-size: 30px;
         font-family: Microsoft YaHei UI Light;
+    }
+
+    .catLi li a {
+        color: #666161;
     }
     </style>
 </head>
@@ -95,7 +102,21 @@
                         <li>FileReader</li>
                         <li>Transform</li>
                         <li>Canvas</li>
-                        <li>WebAudio</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div style="position: absolute;left:0;top:0;width:45%;height:100%;background-color:#40bdd3">
+                    <p style="position:absolute;top:39%;left:25%;font-size:50px;color:#fff">Drag && Drop</p>
+                </div>
+                <div style="position: absolute;left:45%;width:55%">
+                    <ul class="catLi">
+                        <li><a target="_blank" href="https://html5demos.com/drag/">示例1</a></li>
+                        <li><a target="_blank" href="https://user.qzone.qq.com/616315821/infocenter">示例2</a></li>
+                        <li><a target="_blank" href="https://segmentfault.com/a/1190000002810962">Drag && Drop 简介</a></li>
+                        <li><a target="_blank" href="https://caniuse.com/#search=drag">兼容性</a></li>
+                        <li><a target="_blank" href="./component/dropUri.html">简易实现</a></li>
+                        <li><a target="_blank" href="http://qiudeqing.com/demo/html5/drag-and-drop.html">从系统中拖入文件</a></li>
                     </ul>
                 </div>
             </div>
@@ -145,7 +166,7 @@
 
     });
     var initAutoType = function() {
-        var types = ["FE Developer.", "Dev2.", "User Experience.","creativity."];
+        var types = ["FE Developer.", "Dev2.", "User Experience.", "creativity."];
         var words = $("#first-words");
 
         var stopType = false; //用于停止自动打字的

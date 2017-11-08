@@ -1,0 +1,34 @@
+body{
+	background:url(../images/content/dotted.png);
+	padding:60px;
+	text-align:center;
+}
+div{
+ 
+}
+
+h3{
+	font-family:华文细黑,STHeiti,MingLiu;font-size:60px;color:#626262;
+	text-shadow:1px 1px 3px #599DD5;	
+	
+}
+
+.h3{
+	
+	margin-bottom:20px;
+}
+
+h4{
+	font-family:华文细黑,STHeiti,MingLiu;font-size:20px;color:#626262;
+    margin: auto auto auto 60px;	
+}
+
+p{
+	font-size:20px;
+	color:#626262;
+    margin: 20px auto ;	
+	word-spacing:8px; 
+	letter-spacing: 15px;
+	margin-left:52px;
+	
+}

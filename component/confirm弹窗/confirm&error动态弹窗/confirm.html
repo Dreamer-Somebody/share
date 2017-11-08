@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>confirm 弹窗</title>
+	<link rel="stylesheet" type="text/css" href="confirm.css">
+</head>
+<body>
+
+	<div class="confirm-container">
+		<div class="confirm-body">确定要删除么？
+			<i class="close">×</i>
+		</div>
+		<div class="confirm-footer clearfix">
+			<button class="button" id="cancel" onclick = "confirmDialog('cancel')" >取消</button>
+			<button class="button" id="confirm" onclick = "confirmDialog('confirm')" >确认</button>
+		</div>
+	</div>
+
+	<div class="dialog-wrapper">
+		<div class="dialog-container alert-dialog">
+			<div class="dialog-header clearfix">
+				<canvas class="arc-container" width=32 height=32></canvas>
+				<h3>操作有误！</h3>
+			</div>
+			<div class="dialog-body">
+				lemonfavv443,5.19测试通知策略展示,5.19
+			</div>
+		</div>
+	</div>
+
+	<button onclick = "triggerConfirm()" id="trigger">trigger</button>
+	<button onclick = "removeConfirm()" id="remove">remove</button>
+	<button onclick = "triggerDialog('error','123')" id="triggerDialog">triggerDialog</button>
+	<button onclick = "triggerDialog('alert','01234567890012345678900123456789001234567890')" id="triggerDialogAlert">triggerDialogAlert</button>
+	<!-- alert&error 弹窗 -->
+	<script type="text/javascript">
+	    var canvas2d = document.getElementsByTagName('canvas')[0].getContext("2d");
+	    var deg = 0;
+	    var drawArc = function(deg){
+	        var r = deg*Math.PI/180;   //canvas绘制圆形进度
+	        canvas2d.clearRect(0,0,32,32);   //先清理
+	        canvas2d.beginPath();  //路径开始
+	        //canvas2d.fillStyle = "orange"; //填充颜色
+	        canvas2d.strokeStyle = "#4EA1CA"; //canvas边框颜色
+	        canvas2d.lineWidth = 3; //线宽 线宽+半径=中心坐标
+	        canvas2d.arc(16,16,13,0-90*Math.PI/180,r-90*Math.PI/180,false); 
+	        //canvas绘制弧形圆的中心x坐标；y坐标；半径；起始角；结束角；False = 顺时针 true = 逆时针
+	        //canvas2d.fill();//填充实心
+	        canvas2d.stroke();
+	        canvas2d.closePath();
+
+	        //绘制圆心
+	        canvas2d.beginPath(); 
+	        canvas2d.arc(16,16,6,0,Math.PI*2,true); 
+	        canvas2d.fillStyle="#6FB8DC"; 
+	        canvas2d.closePath(); 
+	        canvas2d.fill();
+
+	        //使用定时器让html5 canvas绘制圆形进度动起来
+	        timer = setTimeout(function(){
+	            deg+=1;
+	            drawArc(deg);
+	            //console.log(deg);
+	            var now = new Date()
+	            //console.log('当前秒' + now.getSeconds() + '当前毫秒：' + now.getMilliseconds())
+	            if(deg>359){
+	                clearTimeout(timer);
+	            }
+	        },10);
+
+	    };
+	    drawArc(deg)
+	</script>
+
+	<!-- confirm 弹窗 -->
+	<script type="text/javascript">
+		function triggerConfirm(){
+			var obj = document.createElement('div');
+				obj.className = 'confirm-container'
+				obj.style.animation = 'fadeIn 1s ease'
+				obj.style.transform = 'translate(0px,80px)'
+				context = '<div class="confirm-body">确定要删除么？</div>' + '<div class="confirm-footer">'
+				context = context + '<button class="button" id="cancel" onclick = "confirmDialog(\'cancel\')">取消</button>'
+				context = context + '<button class="button" id="confirm" onclick = "confirmDialog(\'confirm\')" >确认</button>' 
+				context = context + '<br style="clear:both;" />' +'</div></div>'
+				obj.innerHTML = context
+				document.body.appendChild(obj);
+		}
+
+		function removeConfirm(){
+			var obj = document.getElementsByClassName('confirm-container')[0];
+			obj.style.animation = 'fadeOut 1s ease'
+			obj.style.transform = 'translate(0px,0px)'
+			setTimeout(function (){
+				console.log('清除dialog dom')
+				document.body.removeChild(obj)	
+			},1000)
+		}
+
+		function confirmDialog(par){
+			if( par == 'confirm' ){
+				console.log(true)
+			}
+			else if( par == 'cancel' ){
+				console.log(false)
+			}
+			removeConfirm();
+		}
+	</script>
+
+	<!-- alert和error -->
+	<script>
+	var dialogQueue = 0
+	function triggerDialog(type,dialogText){
+		
+		var dom = document.createElement('div')
+        var title = (type=='error')?'操作有误！':'操作成功！'
+        //提示信息大于30字 对话框存活3.6 小于30字 存活1.5秒
+        var dialogTimer = (dialogText.length>30)?3600:1800
+        //arc转速 越大越慢
+        var drawArcTimer = (dialogText.length>30)?10:1.8
+
+		dom.className = (type=='error')?'dialog-container':'dialog-container alert-dialog'
+        dom.style.animation = 'fadeIn 1s ease'
+        dom.style.transform = 'translate(0px,80px)'
+
+		var addDialog = function(){
+			dialogQueue +=1
+			dialogWrapper.appendChild(dom)
+			console.log('当前对话队列数量为' + dialogQueue)
+		}
+        var removeDialog = function(){
+            dom.style.animation = 'fadeOut 1s ease'
+            dom.style.transform = 'translate(0px,0px)'
+            dialogQueue -=1
+            console.log('当前对话队列数量为' + dialogQueue)
+            if(dialogQueue == 0){
+                setTimeout(function(){                	
+                    //延时判断 removeWrapper的时候在判断当前的dialogQueue是否为空
+                    if (dialogQueue == 0){
+                    	dialogWrapper.removeChild(dom)
+                    	document.body.removeChild(dialogWrapper)
+                    }
+                },800)
+            }
+            else{
+                setTimeout(function(){
+                    dialogWrapper.removeChild(dom)
+                },800)
+            }
+        }
+
+
+		var context = '<div class="dialog-header clearfix">' + '<canvas class="arc-container" width=32 height=32></canvas>' + '<h3>' + title + '</h3></div>'
+		context = context + '<div class="dialog-body">' + dialogText + '</div>'
+		dom.innerHTML = context
+
+		var dialogWrapper = document.getElementsByClassName('dialog-wrapper')[0]
+		if(dialogWrapper){
+			addDialog()
+		}
+		else{
+			var dialogWrapper = document.createElement('div')
+			dialogWrapper.className = 'dialog-wrapper'
+			document.body.appendChild(dialogWrapper)
+			addDialog()
+		}
+		
+	    var canvas2d = dom.getElementsByTagName('canvas')[0].getContext("2d");
+	    var deg = 0;
+	    var drawArc = function(deg){
+	        var r = deg*Math.PI/180;   //canvas绘制圆形进度
+	        canvas2d.clearRect(0,0,32,32);   //先清理
+	        canvas2d.beginPath();  //路径开始
+	        //canvas2d.fillStyle = "orange"; //填充颜色
+	        canvas2d.strokeStyle = (type == 'error')?"#D9534F":"#4EA1CA"; //canvas边框颜色
+	        canvas2d.lineWidth = 3; //线宽 线宽+半径=中心坐标
+	        canvas2d.arc(16,16,13,0-90*Math.PI/180,r-90*Math.PI/180,false); 
+	        //canvas绘制弧形圆的中心x坐标；y坐标；半径；起始角；结束角；False = 顺时针 true = 逆时针
+	        //canvas2d.fill();//填充实心
+	        canvas2d.stroke();
+	        canvas2d.closePath();
+
+	        //绘制圆心
+	        canvas2d.beginPath(); 
+	        canvas2d.arc(16,16,6,0,Math.PI*2,true); 
+	        canvas2d.fillStyle = (type == 'error')?"#DE7370":"#6FB8DC"; 
+	        canvas2d.closePath(); 
+	        canvas2d.fill();
+
+	        //使用定时器让html5 canvas绘制圆形进度动起来
+	        drawArcMethod = setTimeout(function(){
+	            deg+=1;
+	            drawArc(deg);
+	            //console.log(deg);
+	            // var now = new Date()
+	            // console.log('当前秒' + now.getSeconds() + '当前毫秒：' + now.getMilliseconds())
+	            if(deg>359){
+	                clearTimeout(drawArcMethod);
+	            }
+	        },drawArcTimer);
+
+	    };
+	    drawArc(deg)
+
+        //var dialogClose = dom.getElementsByClassName('close')[0]
+        // dialogClose.onclick = function(){
+        //     removeDialog()
+        // }
+
+        setTimeout(function(){
+            removeDialog()
+        },dialogTimer)
+	}
+
+	</script>
+</body>
+</html>

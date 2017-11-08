@@ -1,0 +1,10 @@
+使用方法：1、调用CSS样式：
+<link rel="stylesheet" href="css/stylesheets/style.css">
+
+2、调用JS插件代码：
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/jquery-ui-1.8.17.custom.min.js"></script>
+<script src="js/script.js"></script>
+
+3、添加HTML代码：
+将<!--效果html开始-->......<!--效果html结束-->之间的html和js代码；放在<body></body>之间。
