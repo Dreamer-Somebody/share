@@ -20,7 +20,7 @@ fileReader（读取html、excel、indexDB离线应用）
 我自己的想法
 
 
-step1 drag + drop API及示例 + 网上例子(拖拽到垃圾桶 + dataTransfer对象 + 访问被拖拽到的对象是文本链接还是图片 -> 实现google视频中的拖拽地址栏到页面上生成一个标签（iframe） -> QQ空间相册间的拖动？ -> 博客模板布局管理器？所拖即所得)
+step1 drag + drop API及示例 + 网上例子(拖拽到垃圾桶 + dataTransfer对象 + 访问被拖拽到的对象是文本链接还是图片 -> 一个浏览器拖到另一个？ -> 实现google视频中的拖拽地址栏到页面上生成一个标签（iframe） -> QQ空间相册间的拖动？ -> 博客模板布局管理器？所拖即所得)
 step2 fileReader API及之前的drag后的实例演示将html展示出来(iframe)，并提出娟娟姐说的离线解决方案(localStorage + fillFormField 截取html中的表单元素) 
 step3 fileReader 停在展示图片处
 step4 translate各属性展示 + persepective
