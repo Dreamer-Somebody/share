@@ -6,18 +6,18 @@ drag drop （在线visio，拖拽上传）{
     5. 高级功能：切割文件的某段内容
     6. 高级功能：监控浏览器读取本地文件的进度
 }
-transform（translate + perspective + transition）
+transform（translate + perspective + transition + 纪念碑谷）
 canvas 宇宙
 canvas 地图？
 (再往上可以配合webGL实现全景图)
 webGL 3D（VR?）
 audio音频
 canvas 滤镜
-fileReader（读取html、excel、indexDB离线应用）
+fileReader（读取html、excel、indexDB离线应用 或者html点击提交后生成txt 或者json文件，系统授信时增加导入功能用fileReader读取json文件）
 游戏
 微信端交互优化及实践
 网站分享
-我自己的想法
+我自己的想法( border-radius、transtion与前端会越来越好)
 
 
 step1 drag + drop API及示例 + 网上例子(拖拽到垃圾桶 + dataTransfer对象 + 访问被拖拽到的对象是文本链接还是图片 -> 一个浏览器拖到另一个？ -> 实现google视频中的拖拽地址栏到页面上生成一个标签（iframe） -> QQ空间相册间的拖动？ -> 博客模板布局管理器？所拖即所得)
@@ -26,3 +26,6 @@ step3 fileReader 停在展示图片处
 step4 translate各属性展示 + persepective
 step5 展示元素周期表
 step6 
+
+
+step Last 前端的潜能（展示分享前端技术在各个行业的展现（酷家乐、3D水族馆、音频处理、可翻转的书籍、打碎视频、node聊天室、疯狂打字）与潜力无限，兼容性还不好，未来是非常有希望的）
