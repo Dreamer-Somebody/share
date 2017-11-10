@@ -13,6 +13,7 @@
     }
 
     #output {
+        max-height: 600px;
         width: 1000px;
         margin: 30px 10px 0px 100px;
         border: 2px solid #aaa;
@@ -20,7 +21,7 @@
     }
 
     code {
-        font-family: consolas;
+        font-family: roboto mono medium;
         font-size: 18px;
     }
     </style>
@@ -58,6 +59,9 @@
             } else if (/html/.test(files[0].type)) {
                 reader.readAsText(files[0]);
                 type = "html";
+            } else if(/javascript/.test(files[0].type) || /json/.test(files[0].type)){
+                reader.readAsText(files[0]);
+                type = "javascript";
             } else {
                 reader.readAsText(files[0]);
                 type = "text";
@@ -81,12 +85,15 @@
                         break;
                 }
                 output.innerHTML = html;
-                if (type == "html") {
-                    $(output).html(html);
+                if (type == "html" || type=="javascript") {
+                    type == "html" &&  $(output).html(html);
                     $('.codeBoard code').text(reader.result);
+                    $('pre code').removeClass();
                     $('pre code').each(function(i, block) {
                         hljs.highlightBlock(block);
                     });
+                }else {
+                    $('.codeBoard code').text('');
                 }
             };
         });
